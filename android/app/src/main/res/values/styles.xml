@@ -4,4 +4,14 @@
     <style name="GstPlayTheme" parent="Theme.AppCompat">
 
     </style>
+
+    <style name="GstPlayAppDialogTheme" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#FFC107</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#FFFFFF</item>
+        <!-- Used for the background -->
+        <item name="android:background">@android:color/background_dark</item>
+    </style>
+
 </resources>

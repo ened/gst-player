@@ -1,6 +1,7 @@
 package org.freedesktop.gstreamer.play;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
@@ -10,13 +11,17 @@ import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
 import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 
 public class VideoSelector extends AppCompatActivity implements LoaderManager.LoaderCallbacks<Cursor> {
@@ -66,6 +71,33 @@ public class VideoSelector extends AppCompatActivity implements LoaderManager.Lo
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_about) {
             return true;
+        }
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_open_url) {
+            final EditText input = new EditText(this);
+            new AlertDialog.Builder(VideoSelector.this, R.style.GstPlayAppDialogTheme)
+                    .setTitle(R.string.action_open_url)
+                    .setMessage(getString(R.string.open_url_prompt))
+                    .setView(input)
+                    .setPositiveButton(R.string.ok,
+                    new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            Editable value = input.getText();
+                            try {
+                                Intent intent = new Intent(VideoSelector.this, Play.class);
+                                intent.setData(Uri.parse(value.toString()));
+                                startActivity(intent);
+                            } catch (Exception e) {
+                                Toast.makeText(VideoSelector.this, R.string.invalid_url, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    }).setNegativeButton(R.string.cancel, new DialogInterface.OnClickListener() {
+                public void onClick(DialogInterface dialog, int whichButton) {
+                    // Do nothing.
+                }
+            }).show();
+
         }
 
         //noinspection SimplifiableIfStatement

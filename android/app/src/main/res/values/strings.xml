@@ -6,4 +6,9 @@
 
     <string name="action_about">About</string>
     <string name="sort">Sort</string>
+    <string name="action_open_url">Open URL</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="invalid_url">Invalid URL</string>
+    <string name="open_url_prompt">Please specify a standard URL (http://, file://)</string>
 </resources>
